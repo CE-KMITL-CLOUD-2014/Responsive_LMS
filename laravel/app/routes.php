@@ -10,8 +10,14 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	return View::make('hello');
+	$data = Test::all();
+	return($data);
+	//phpinfo();
+});
+Route::get('/info', function()
+{
+	phpinfo();
 });

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'sqlsrv',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,10 +76,10 @@ return array(
 
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
-			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'host'     => 'tcp:psparg25ep.database.windows.net,1433',
+			'database' => 'rpslmsdb',
+			'username' => 'web@psparg25ep',
+			'password' => 'Aa12344321',
 			'prefix'   => '',
 		),
 

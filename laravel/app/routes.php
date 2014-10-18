@@ -14,6 +14,7 @@ Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
 	$data = Test::all();
+	$data = 5;
 	return($data);
 	//phpinfo();
 });

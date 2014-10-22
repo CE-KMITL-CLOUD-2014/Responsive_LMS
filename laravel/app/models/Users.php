@@ -26,7 +26,7 @@
 			}
 		}
 		public static function getFromId($id){
-			$dataTmp = UsersRepository::find(1);
+			$dataTmp = UsersRepository::where('ID','=',$id)->get()[0];
 			$obj = new Users;
 			if(count($dataTmp)==1){
 				$obj->id=$dataTmp->ID;

@@ -15,15 +15,17 @@
 				return $maxid;
 			}
 		}
+		public static function getFromId($id){
+			return UsersRepository::where('ID','=',$id)->get();
+		}
 		public function __construct( ) {
-			
-   			$this->$id;
-			$this->$username;
-			$this->$password;
-			$this->$title;
-			$this->$name;
-			$this->$surname;
-			$this->$status;
+   			$this->$id=getMaxId()+1;
+			$this->$username=NULL;
+			$this->$password=NULL;
+			$this->$title=NULL;
+			$this->$name=NULL;
+			$this->$surname=NULL;
+			$this->$status=NULL;
     	}
 		public function getID(){
 			return $this->ID;

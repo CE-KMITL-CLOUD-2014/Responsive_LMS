@@ -24,15 +24,11 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = new UsersRepository;
+	$dataTmp = UsersRepository::find(2);
 	var_dump($dataTmp);
-	$dataTmp->ID = 2;
-	$dataTmp->username = "NULL";
-	$dataTmp->password = "NULL";
-	$dataTmp->title = "NULL";
-	$dataTmp->name = "NULL";
-	$dataTmp->surname = "NULL";
-	$dataTmp->status = 1;
+	$dataTmp->username = "wisuwat";
+	$dataTmp->password = "Sunhem";
+	$dataTmp->status = 0;
 	$dataTmp->save();
 	//phpinfo();
 });

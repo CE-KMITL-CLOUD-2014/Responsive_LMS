@@ -24,11 +24,11 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = UsersRepository::where('ID', '=', 2)->get()[0];
+	$dataTmp = UsersRepository::find(2);
 	echo($dataTmp);
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";
-	$dataTmp->save();
+	$dataTmp->sasdfsdfsdve();
 	echo($dataTmp);
 	return "edit";
 	//phpinfo();

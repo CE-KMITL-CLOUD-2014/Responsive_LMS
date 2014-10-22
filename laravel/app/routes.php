@@ -25,7 +25,7 @@ Route::get('/', function()
 		return 'NULL';
 	}*/
 	$dataTmp = Users::getFromId(2);
-	$dataTmp->username = 'kuki';
+	$dataTmp->setUser('kuki');
 	$dataTmp->update();
 	//phpinfo();
 });

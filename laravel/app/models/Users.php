@@ -8,7 +8,7 @@
 		private $surname;
 		private $status;
 		public static function getMaxId(){
-			return UsersRepository::orderBy('id', 'DESC')->first();
+			return Test::orderBy('id', 'DESC')->first();
 		}
 		public function __construct( ) {
 			

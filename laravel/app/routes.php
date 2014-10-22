@@ -13,7 +13,7 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	$data=Users::getFromId(1)
+	$data=Users::getFromId(1);
 	return($data->getName());
 	//phpinfo();
 });

@@ -18,7 +18,7 @@
 		}
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::where('ID','=',$id)->get();
-			$obj = new Users;
+			/*$obj = new Users;
 			if(count($dataTmp)!=0){
 				$this->$id=$dataTmp->ID;
 				$this->$username=$dataTmp->username;
@@ -28,7 +28,8 @@
 				$this->$surname=$dataTmp->surname;
 				$this->$status=$dataTmp->status;
 			}
-			return $obj;
+			return $obj;*/
+			return Users::getMaxId();
 
 		}
 

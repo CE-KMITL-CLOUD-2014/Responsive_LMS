@@ -8,7 +8,7 @@
 		private $surname;
 		private $status;
 		public function __construct() {
-   			$this->$id=Users::getMaxId()+1;
+   			$this->$id=NULL;
    			$this->$id=NULL;
 			$this->$username=NULL;
 			$this->$password=NULL;

@@ -8,8 +8,8 @@
 		private $surname;
 		private $status;
 		public function __construct() {
-   			//$this->$id=Users::getMaxId()+1;
-   			//$this->$id=NULL;
+   			$this->$id=Users::getMaxId()+1;
+   			$this->$id=NULL;
 			$this->$username=NULL;
 			$this->$password=NULL;
 			$this->$title=NULL;
@@ -29,7 +29,7 @@
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::where('ID','=',$id)->get();
 			$obj = new Users();
-			/*if(count($dataTmp)!=0){
+			if(count($dataTmp)!=0){
 				$this->$id=$dataTmp->ID;
 				$this->$username=$dataTmp->username;
 				$this->$password=$dataTmp->password;
@@ -38,7 +38,7 @@
 				$this->$surname=$dataTmp->surname;
 				$this->$status=$dataTmp->status;
 			}
-			return $obj;*/
+			return $obj;
 			return Users::getMaxId();
 
 		}

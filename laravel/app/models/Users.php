@@ -17,6 +17,7 @@
 		}
 		public static function getFromId($id){
 			return UsersRepository::where('ID','=',$id)->get();
+			
 		}
 		public function __construct( ) {
    			$this->$id=getMaxId()+1;

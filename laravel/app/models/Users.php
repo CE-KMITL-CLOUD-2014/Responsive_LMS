@@ -80,7 +80,7 @@
 			}
 		}
 		public function update(){
-			$dataTmp = new UsersRepository::find($this->id);
+			$dataTmp = UsersRepository::find($this->id);
 			if($dataTmp!=NULL){
 				$dataTmp->ID = $this->id;
 				$dataTmp->username = $this->username;

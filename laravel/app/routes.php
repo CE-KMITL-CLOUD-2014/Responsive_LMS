@@ -28,7 +28,7 @@ Route::get('/', function()
 	$dataTmp = UsersRepository::find(2);
 	echo($dataTmp);
 	DB::table('user')->insert(array(                      
- 		 array('ID' => 3, 'username' => 'Laptop','username' => 'Laptop'
+ 		 array('ID' => 3, 'username' => 'Laptop','password' => 'Laptop'
  		 	, 'title' => 'Laptop','name' => 'Laptop'
  		 	, 'surname' => 'Laptop','status' => '0')
 	));      

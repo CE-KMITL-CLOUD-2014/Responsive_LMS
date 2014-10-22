@@ -25,7 +25,7 @@ Route::get('/', function()
 		return 'NULL';
 	}*/
 	$dataTmp = new UsersRepository;
-	$dataTmp = UsersRepository::find(2)->update(array('status' => 0));;
+	$dataTmp = UsersRepository::find(2);
 	echo($dataTmp);
 	DB::table('user')->insert(array(                      
  		 array('ID' => 3, 'username' => 'Laptop','username' => 'Laptop'

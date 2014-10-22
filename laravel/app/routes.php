@@ -24,7 +24,7 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = UsersRepository::find(2);
+	$dataTmp = UsersRepository::where('ID', '=', 2)->get()[0];
 	echo($dataTmp);
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";

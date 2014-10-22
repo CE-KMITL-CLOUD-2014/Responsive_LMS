@@ -28,7 +28,7 @@ Route::get('/', function()
 	echo($dataTmp);
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";
-	$dataTmp->save();
+	$dataTmp->delete();
 	echo($dataTmp);
 	return "edit";
 	//phpinfo();

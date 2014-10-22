@@ -9,7 +9,6 @@
 		private $status;
 		public function __construct() {
    			$this->$id=NULL;
-   			$this->$id=NULL;
 			$this->$username=NULL;
 			$this->$password=NULL;
 			$this->$title=NULL;
@@ -17,7 +16,7 @@
 			$this->$surname=NULL;
 			$this->$status=NULL;
     	}
-		public static function getMaxId(){
+	/*	public static function getMaxId(){
 			$maxid= UsersRepository::orderBy('ID', 'DESC')->first();
 			if(!isset($maxid)){
 				return "0";
@@ -25,15 +24,15 @@
 			else{
 				return $maxid->ID;
 			}
-		}
-		public static function getFromId($id){
+		}*/
+	/*	public static function getFromId($id){
 			$dataTmp = UsersRepository::where('ID','=',$id)->get();
 			$obj = new Users();
 			return Users::getMaxId();
 
-		}
+		}*/
 		public function getID(){
-			return $this->ID;
+			return $this->id;
 		}
 		public function setUser($user){
 			$this->username = $user;

@@ -29,7 +29,7 @@ Route::get('/', function()
 	$dataTmp->ID="3";
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";
-	$dataTmp->update();
+	$dataTmp->save();
 	//echo($dataTmp);
 	return "edit";
 	//phpinfo();

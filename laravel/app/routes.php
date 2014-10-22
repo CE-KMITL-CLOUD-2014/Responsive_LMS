@@ -16,6 +16,8 @@ Route::get('/', function()
 	$data=Users::getFromId(1);
 	if($data!=NULL){
 		return(var_dump($data));
+		$data->setStatus(1);
+		$data->update();
 	}
 	else{
 		return 'NULL';

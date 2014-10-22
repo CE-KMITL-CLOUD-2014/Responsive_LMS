@@ -25,6 +25,7 @@
 				return $maxid->ID;
 			}
 		}
+
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::find($id);
 			$obj = new Users;
@@ -43,11 +44,63 @@
 			}
 
 		}
+		public static function getFromUserPass($user,$pass){
+			$dataTmp = UsersRepository::where('username','=',$user)->where('password','=',$pass);
+			$obj = new Users;
+			if(count($dataTmp)==1){
+				$obj->id=$dataTmp[0]->ID;
+				$obj->username=$dataTmp[0]->username;
+				$obj->password=$dataTmp[0]->password;
+				$obj->title=$dataTmp[0]->title;
+				$obj->name=$dataTmp[0]->name;
+				$obj->surname=$dataTmp[0]->surname;
+				$obj->status=$dataTmp[0]->status;
+				return $obj;
+			}
+			else{
+				return NULL;
+			}
+		}
+		public insert(){
+			$dataTmp = UsersRepository::where('ID','=',$this->id)->orWhere('username','=',$this->username);
+			if(count($dataTmp)==0){
+				$dataTmp = new UsersRepository;
+				$dataTmp->ID = $this->id;
+				$dataTmp->username = $this->username;
+				$dataTmp->password = $this->password;
+				$dataTmp->title = $this->title;
+				$dataTmp->name = $this->name;
+				$dataTmp->surname = $this->surname;
+				$dataTmp->status = $this->status;
+				$dataTmp->save();
+			}
+			else{
+				return false;
+			}
+		}
+		public update(){
+			$dataTmp = new UsersRepository::find($this->id);
+			if($dataTmp!=NULL){
+				$dataTmp->ID = $this->id;
+				$dataTmp->username = $this->username;
+				$dataTmp->password = $this->password;
+				$dataTmp->title = $this->title;
+				$dataTmp->name = $this->name;
+				$dataTmp->surname = $this->surname;
+				$dataTmp->status = $this->status;
+				$dataTmp->save();
+			}
+			else{
+				return false;
+			}
+
+		}
 		public function getID(){
 			return $this->id;
 		}
 		public function setUser($user){
 			$this->username = $user;
+
 		}
 		public function getUser(){
 			return $this->username;

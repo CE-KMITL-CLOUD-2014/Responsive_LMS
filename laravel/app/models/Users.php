@@ -90,7 +90,7 @@
 				$dataTmp->surname = $this->surname;
 				$dataTmp->status = $this->status;
 				$dataTmp->save();
-				return true;
+				return $dataTmp;
 			}
 			else{
 				return false;

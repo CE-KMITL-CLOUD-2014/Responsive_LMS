@@ -33,7 +33,7 @@
 
 		}
 
-		public function Users() {
+		public function __construct() {
    			//$this->$id=Users::getMaxId()+1;
    			//$this->$id=NULL;
 			$this->$username=NULL;

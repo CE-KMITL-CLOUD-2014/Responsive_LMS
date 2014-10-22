@@ -25,12 +25,12 @@ Route::get('/', function()
 		return 'NULL';
 	}*/
 	$dataTmp = UsersRepository::find(2);
-	var_dump($dataTmp);
+	echo($dataTmp);
 	$dataTmp->id=3;
 	$dataTmp->username = null;
 	$dataTmp->password = "bbbb";
 	$dataTmp->save();
-	var_dump($dataTmp);
+	echo($dataTmp);
 	return "edit";
 	//phpinfo();
 });

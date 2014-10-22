@@ -32,7 +32,7 @@
 		}
 
 		public function __construct() {
-   			$this->$id=getMaxId()+1;
+   			$this->$id=Users::getMaxId()+1;
 			$this->$username=NULL;
 			$this->$password=NULL;
 			$this->$title=NULL;

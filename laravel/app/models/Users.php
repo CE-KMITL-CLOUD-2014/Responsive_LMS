@@ -18,8 +18,8 @@
 		}
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::where('ID','=',$id)->get();
-			/*$obj = new Users;
-			if(count($dataTmp)!=0){
+			$obj = new Users;
+			/*if(count($dataTmp)!=0){
 				$this->$id=$dataTmp->ID;
 				$this->$username=$dataTmp->username;
 				$this->$password=$dataTmp->password;

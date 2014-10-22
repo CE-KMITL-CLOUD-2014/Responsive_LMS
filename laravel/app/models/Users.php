@@ -7,6 +7,16 @@
 		private $name;
 		private $surname;
 		private $status;
+		public function __construct() {
+   			//$this->$id=Users::getMaxId()+1;
+   			//$this->$id=NULL;
+			$this->$username=NULL;
+			$this->$password=NULL;
+			$this->$title=NULL;
+			$this->$name=NULL;
+			$this->$surname=NULL;
+			$this->$status=NULL;
+    	}
 		public static function getMaxId(){
 			$maxid= UsersRepository::orderBy('ID', 'DESC')->first();
 			if(!isset($maxid)){
@@ -33,16 +43,7 @@
 
 		}
 
-		public function __construct() {
-   			//$this->$id=Users::getMaxId()+1;
-   			//$this->$id=NULL;
-			$this->$username=NULL;
-			$this->$password=NULL;
-			$this->$title=NULL;
-			$this->$name=NULL;
-			$this->$surname=NULL;
-			$this->$status=NULL;
-    	}
+		
 		public function getID(){
 			return $this->ID;
 		}

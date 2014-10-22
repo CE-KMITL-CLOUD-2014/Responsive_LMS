@@ -17,7 +17,8 @@ Route::get('/', function()
 	if($data!=NULL){
 		return(var_dump($data));
 		$data->setStatus(1);
-		$data->update();
+		$state=$data->update();
+		var_dump($state);
 	}
 	else{
 		return 'NULL';

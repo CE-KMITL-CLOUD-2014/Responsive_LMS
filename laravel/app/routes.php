@@ -13,7 +13,7 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	return(Users::getFromId());
+	return(Users::getFromId(1));
 	//phpinfo();
 });
 Route::get('/info', function()

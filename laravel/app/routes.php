@@ -13,8 +13,7 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	$data = Test::all();
-	return($data);
+	return(Users::getMaxId());
 	//phpinfo();
 });
 Route::get('/info', function()

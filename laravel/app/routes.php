@@ -29,7 +29,7 @@ Route::get('/', function()
 	$dataTmp->username = "wisuwat";
 	$dataTmp->password = "Sunhem";
 	$dataTmp->status = 0;
-	$dataTmp->save();
+	$dataTmp->update();
 	//phpinfo();
 });
 Route::get('/info', function()

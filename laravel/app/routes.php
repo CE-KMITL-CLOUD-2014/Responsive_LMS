@@ -27,11 +27,11 @@ Route::get('/', function()
 	$dataTmp = new UsersRepository;
 	var_dump($dataTmp);
 	$dataTmp->ID = 2;
-	$dataTmp->username = NULL;
-	$dataTmp->password = NULL;
-	$dataTmp->title = NULL;
-	$dataTmp->name = NULL;
-	$dataTmp->surname = NULL;
+	$dataTmp->username = "NULL";
+	$dataTmp->password = "NULL";
+	$dataTmp->title = "NULL";
+	$dataTmp->name = "NULL";
+	$dataTmp->surname = "NULL";
 	$dataTmp->status = 1;
 	$dataTmp->save();
 	//phpinfo();

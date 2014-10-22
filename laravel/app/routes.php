@@ -24,7 +24,7 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = UsersRepository::find(1);
+	$dataTmp = new UsersRepository;
 	$dataTmp->status = 1;
 	$dataTmp->save(); 
 	//phpinfo();

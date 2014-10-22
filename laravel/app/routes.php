@@ -26,7 +26,7 @@ Route::get('/', function()
 	}*/
 	$dataTmp = UsersRepository::find(2);
 	var_dump($dataTmp);
-	$dataTmp->id=null;
+	$dataTmp->id=3;
 	$dataTmp->username = null;
 	$dataTmp->password = "bbbb";
 	$dataTmp->save();

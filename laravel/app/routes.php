@@ -27,8 +27,12 @@ Route::get('/', function()
 	$dataTmp = new UsersRepository;
 	$dataTmp = UsersRepository::find(2)->update(array('status' => 0));;
 	echo($dataTmp);
-	$dataTmp->username = "xxx";
-	$dataTmp->password = "bbbb";
+	DB::table('user')->insert(array(                      
+ 		 array('ID' => 3, 'username' => 'Laptop','username' => 'Laptop'
+ 		 	, 'title' => 'Laptop','name' => 'Laptop'
+ 		 	, 'surname' => 'Laptop','status' => '0')
+	));      
+	$obj->id=$dataTmp[0]->ID;
 	$dataTmp->save();
 	echo($dataTmp);
 	return "edit";

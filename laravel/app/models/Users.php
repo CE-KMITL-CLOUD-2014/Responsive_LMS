@@ -61,7 +61,7 @@
 				return NULL;
 			}
 		}
-		public insert(){
+		public function insert(){
 			$dataTmp = UsersRepository::where('ID','=',$this->id)->orWhere('username','=',$this->username);
 			if(count($dataTmp)==0){
 				$dataTmp = new UsersRepository;
@@ -73,13 +73,13 @@
 				$dataTmp->surname = $this->surname;
 				$dataTmp->status = $this->status;
 				$dataTmp->save();
-				//return true;
+				return true;
 			}
 			else{
 				return false;
 			}
 		}
-		public update(){
+		public function update(){
 			$dataTmp = new UsersRepository::find($this->id);
 			if($dataTmp!=NULL){
 				$dataTmp->ID = $this->id;
@@ -90,7 +90,7 @@
 				$dataTmp->surname = $this->surname;
 				$dataTmp->status = $this->status;
 				$dataTmp->save();
-				//return true;
+				return true;
 			}
 			else{
 				return false;

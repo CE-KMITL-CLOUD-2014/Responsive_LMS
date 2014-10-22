@@ -32,7 +32,7 @@ Route::get('/', function()
  		 	, 'title' => 'Laptop','name' => 'Laptop'
  		 	, 'surname' => 'Laptop','status' => '0')
 	));     */
-	DB::->where('ID', '=','2')
+	DB::table('user')->where('ID', '=','2')
   ->update(array('username' => 'eiei', 'password' => 'eiei'));
 	echo($dataTmp);   
 	return "edit";

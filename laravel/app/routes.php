@@ -25,7 +25,7 @@ Route::get('/', function()
 		return 'NULL';
 	}*/
 	$dataTmp = new UsersRepository;
-	$dataTmp = UsersRepository::find(2)->update(array('status' => 2));;
+	$dataTmp = UsersRepository::find(2)->update(array('status' => 0));;
 	echo($dataTmp);
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";

@@ -24,13 +24,13 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = UsersRepository::find(2);
+	$dataTmp = new UsersRepository;
 	echo($dataTmp);
 	$dataTmp->ID="3";
 	$dataTmp->username = "xxx";
 	$dataTmp->password = "bbbb";
 	$dataTmp->update();
-	echo($dataTmp);
+	//echo($dataTmp);
 	return "edit";
 	//phpinfo();
 });

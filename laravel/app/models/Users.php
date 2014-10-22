@@ -28,6 +28,19 @@
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::where('ID','=',$id)->get();
 			$obj = new Users;
+			if(count($dataTmp)==1){
+				$obj->id=$dataTmp->ID;
+				$obj->username=$dataTmp->username;
+				$obj->password=$dataTmp->IpasswordD;
+				$obj->title=$dataTmp->title;
+				$obj->name=$dataTmp->name;
+				$obj->surname=$dataTmp->surname;
+				$obj->status=$dataTmp->status;
+				return $obj;
+			}
+			else{
+				return NULL;
+			}
 
 		}
 		public function getID(){

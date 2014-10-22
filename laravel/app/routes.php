@@ -13,8 +13,8 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	$data = new Users;
-	//return(Users::getFromId(1));
+	$data=Users::getFromId(1)
+	return();
 	//phpinfo();
 });
 Route::get('/info', function()

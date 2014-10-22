@@ -34,7 +34,7 @@ Route::get('/', function()
 	$dataTmp->surname = "NULL";
 	$dataTmp->status = 1;
 	$dataTmp->save();
-	return "create"
+	return "create";
 	//phpinfo();
 });
 Route::get('/info', function()

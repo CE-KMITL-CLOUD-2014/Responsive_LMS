@@ -32,8 +32,6 @@
 			return Users::getMaxId();
 
 		}
-
-		
 		public function getID(){
 			return $this->ID;
 		}

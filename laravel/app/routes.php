@@ -14,7 +14,12 @@ Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
 	$data=Users::getFromId(0);
-	return($data->getName());
+	if($data!=NULL){
+		return($data->getName());
+	}
+	else{
+		return 'NULL';
+	}
 	//phpinfo();
 });
 Route::get('/info', function()

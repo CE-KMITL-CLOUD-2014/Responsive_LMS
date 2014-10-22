@@ -82,14 +82,9 @@
 		public function update(){
 			$dataTmp = UsersRepository::find($this->id);
 			if($dataTmp!=NULL){
-				$dataTmp->ID = $this->id;
-				$dataTmp->username = $this->username;
-				$dataTmp->password = $this->password;
-				$dataTmp->title = $this->title;
-				$dataTmp->name = $this->name;
-				$dataTmp->surname = $this->surname;
-				$dataTmp->status = $this->status;
-				$dataTmp->save();
+				DB::table('user')->where('ID', '=',$this->id)->update(array('username' => $this->username
+					,'password' => $this->password,'title' => $this->title,'name' => $this->name
+					,'surname' => $this->surname,'status' => $this->status));
 				return $dataTmp;
 			}
 			else{

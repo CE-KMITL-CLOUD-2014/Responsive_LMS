@@ -24,18 +24,9 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
-	$dataTmp = new UsersRepository;
-	$dataTmp = UsersRepository::find(2);
-	echo($dataTmp);
-	/*DB::table('user')->insert(array(                      
- 		 array('ID' => 3, 'username' => 'Laptop','password' => 'Laptop'
- 		 	, 'title' => 'Laptop','name' => 'Laptop'
- 		 	, 'surname' => 'Laptop','status' => '0')
-	));     */
-	DB::table('user')->where('ID', '=','2')
-  ->update(array('username' => 'eiei', 'password' => 'eiei'));
-	echo($dataTmp);   
-	return "edit";
+	$dataTmp = User::find(2);
+	$dataTmp->username = 'kuki'
+	$dataTmp->update();
 	//phpinfo();
 });
 Route::get('/info', function()

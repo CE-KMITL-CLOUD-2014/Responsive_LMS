@@ -13,9 +13,9 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	$data=Users::getFromId(0);
+	$data=Users::getFromId(1);
 	if($data!=NULL){
-		return($data->getName());
+		return(var_dump($data));
 	}
 	else{
 		return 'NULL';

@@ -8,7 +8,7 @@
 		private $surname;
 		private $status;
 		public static function getMaxId(){
-			return Test::orderBy('id', 'DESC')->first();
+			return Test::orderBy('id', 'DESC')->first()->id;
 		}
 		public function __construct( ) {
 			

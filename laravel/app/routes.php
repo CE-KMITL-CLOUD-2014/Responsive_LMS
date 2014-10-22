@@ -13,9 +13,9 @@
 Route::get('/my', 'ExampleTest@testBasicExample');
 Route::get('/', function()
 {
-	$data=Users::getFromId(1);
+	/*$data=Users::getFromId(1);
 	if($data!=NULL){
-		return(var_dump($data));
+		//return(var_dump($data));
 		$data->setStatus(1);
 		$state=$data->update();
 		return(var_dump($state));
@@ -23,7 +23,10 @@ Route::get('/', function()
 	}
 	else{
 		return 'NULL';
-	}
+	}*/
+	$dataTmp = UsersRepository::find(1);
+	$dataTmp->status = 1;
+	$dataTmp->save(); 
 	//phpinfo();
 });
 Route::get('/info', function()

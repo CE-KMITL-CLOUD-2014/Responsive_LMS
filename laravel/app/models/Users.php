@@ -29,7 +29,7 @@
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::find($id);
 			$obj = new Users;
-			if(count($dataTmp)==1){
+			if($dataTmp!=NULL){
 				$obj->id=$dataTmp->ID;
 				$obj->username=$dataTmp->username;
 				$obj->password=$dataTmp->password;

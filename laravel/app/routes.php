@@ -10,7 +10,10 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('/my', 'ExampleTest@testBasicExample');
+Route::get('/my', function()
+{
+	return '<h1>555</h1>'
+});
 Route::get('/', function()
 {
 	/*$data=Users::getFromId(1);
@@ -24,6 +27,7 @@ Route::get('/', function()
 	else{
 		return 'NULL';
 	}*/
+	//$dataTmp  new Users;
 	$dataTmp = Users::getFromId(2);
 	$dataTmp->setUser('kuki');
 	$dataTmp->update();

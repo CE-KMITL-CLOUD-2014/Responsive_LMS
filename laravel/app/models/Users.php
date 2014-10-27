@@ -6,16 +6,30 @@
 		private $title;
 		private $name;
 		private $surname;
+		private $email;
 		private $status;
 		public function __construct() {
-   			$this->id=Users::getMaxId()+1;
+   			$this->id=NULL;
 			$this->username=NULL;
 			$this->password=NULL;
 			$this->title=NULL;
 			$this->name=NULL;
 			$this->surname=NULL;
+			$this->email=NULL;
 			$this->status=NULL;
     	}
+    	public function cloneUser(Users $user){	
+			if($user!=NULL){
+				$this->id=$user->getID();
+				$this->username=$user->getUsername();
+				$this->password=$user->getPassword();
+				$this->title=$user->getTitle();
+				$this->name=$user->getName();
+				$this->surname=$user->getSurname();
+				$this->email=$user->getEmail();
+				$this->status=$user->getStatus();
+			}
+		}
 		public static function getMaxId(){
 			$maxid= UsersRepository::orderBy('ID', 'DESC')->first();
 			if(!isset($maxid)){
@@ -29,14 +43,16 @@
 		public static function getFromId($id){
 			$dataTmp = UsersRepository::find($id);
 			$obj = new Users;
+			
 			if($dataTmp!=NULL){
-				$obj->id=$dataTmp->ID;
-				$obj->username=$dataTmp->username;
-				$obj->password=$dataTmp->password;
-				$obj->title=$dataTmp->title;
-				$obj->name=$dataTmp->name;
-				$obj->surname=$dataTmp->surname;
-				$obj->status=$dataTmp->status;
+				$obj->setId($dataTmp->ID);
+				$obj->setUsername($dataTmp->username);
+				$obj->setPassword($dataTmp->password);
+				$obj->setTitle($dataTmp->title);
+				$obj->setName($dataTmp->name);
+				$obj->setSurname($dataTmp->surname);
+				$obj->setEmail($dataTmp->email);
+				$obj->setStatus($dataTmp->status);
 				return $obj;
 			}
 			else{
@@ -44,92 +60,90 @@
 			}
 
 		}
+		protected static function  importFromUserPass($user,$pass){
+			return UsersRepository::where('username','=',$user)->where('password','=',$pass)->get();
+		}
 		public static function getFromUserPass($user,$pass){
-			$dataTmp = UsersRepository::where('username','=',$user)->where('password','=',$pass);
-			$obj = new Users;
+			$dataTmp = Users::importFromUserPass($user,$pass);
 			if(count($dataTmp)==1){
-				$obj->id=$dataTmp[0]->ID;
-				$obj->username=$dataTmp[0]->username;
-				$obj->password=$dataTmp[0]->password;
-				$obj->title=$dataTmp[0]->title;
-				$obj->name=$dataTmp[0]->name;
-				$obj->surname=$dataTmp[0]->surname;
-				$obj->status=$dataTmp[0]->status;
-				return $obj;
+				return Users::getFromId($dataTmp[0]->ID);
 			}
 			else{
 				return NULL;
 			}
 		}
-		public function insert(){
-			$dataTmp = UsersRepository::where('ID','=',$this->id)->orWhere('username','=',$this->username);
-			if(count($dataTmp)==0){
-				$dataTmp = new UsersRepository;
-				$dataTmp->ID = $this->id;
-				$dataTmp->username = $this->username;
-				$dataTmp->password = $this->password;
-				$dataTmp->title = $this->title;
-				$dataTmp->name = $this->name;
-				$dataTmp->surname = $this->surname;
-				$dataTmp->status = $this->status;
-				$dataTmp->save();
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
+
 		public function update(){
 			$dataTmp = UsersRepository::find($this->id);
 			if($dataTmp!=NULL){
 				DB::table('user')->where('ID', '=',$this->id)->update(array('username' => $this->username
 					,'password' => $this->password,'title' => $this->title,'name' => $this->name
-					,'surname' => $this->surname,'status' => $this->status));
-				return $dataTmp;
+					,'surname' => $this->surname,'email' => $this->email,'status' => $this->status));
+				return true;
 			}
 			else{
 				return false;
 			}
 
 		}
+		public function setID($data){
+			$this->id = $data;
+		}
 		public function getID(){
 			return $this->id;
 		}
-		public function setUser($user){
-			$this->username = $user;
+		public function setUsername($data){
+			$this->username = $data;
 
 		}
-		public function getUser(){
+		public function getUsername(){
 			return $this->username;
 		}
-		public function setPass($pass){
-			$this->password = $pass;
+		public function setPassword($data){
+			$this->password = $data;
 		}
-		public function getPass(){
+		public function getPassword(){
 			return $this->password;
 		}
-		public function setTitle($title){
-			$this->title = $title;
+		public function setTitle($data){
+			$this->title = $data;
 		}
 		public function getTitle(){
 			return $this->title;
 		}
-		public function setName($name){
-			$this->name = $name;
+		public function setName($data){
+			$this->name = $data;
 		}
 		public function getName(){
 			return $this->name;
 		}
-		public function setSurname($surname){
-			$this->surname = $surname;
+		public function setSurname($data){
+			$this->surname = $data;
 		}
 		public function getSurname(){
 			return $this->surname;
 		}
-		public function setStatus($status){
-			$this->status = $status;
+		public function setStatus($data){
+			$this->status = $data;
 		}
 		public function getStatus(){
 			return $this->status;
+		}
+		public function setEmail($data){
+			$this->email = $data;
+		}
+		public function getEmail(){
+			return $this->email;
+		}
+
+		public function toString(){
+			return 'id = ' . $this->id.'<br>'.
+			'username = ' . $this->username.'<br>'.
+			'password = ' . $this->password.'<br>'.
+			'title = ' . $this->title.'<br>'.
+			'name = ' . $this->name.'<br>'.
+			'surname = ' . $this->surname.'<br>'.
+			'email = ' . $this->email.'<br>'.
+			'status = ' . $this->status.'<br>';
 		}
 	}

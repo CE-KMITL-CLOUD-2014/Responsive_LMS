@@ -22,7 +22,7 @@
 	  <div class="col-md-12">
 		<div id="formContainer">
 		  <!--<form id="login"  method="post" action="action_login.php">-->
-		  <form id="login"  action="action_login.php" method="post">
+		  <form id="login"  action="{{ url('/action_login') }}" method="post">
 			<a href="#" id="flipToRecover" class="flipLink">Forgot?</a>
 			<input type="text" name="user_id" id="loginEmail" placeholder="Username"/>
 			<input type="password" name="user_password" id="loginPass" placeholder="Password" />

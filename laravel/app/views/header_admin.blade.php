@@ -39,11 +39,10 @@
           </ul>
         </li>
 		<li class="{{$active[2]}}"><a href="{{ url('/admin/subject') }}">ระบบจัดการวิชา</a></li>
-		<li class="{{$active[3]}}"><a href="{{ url('/admin/relationship') }}">ระบบจัดการความสัมพันธ์</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar {{$active[4]}}">
-        <li><a href="{{ url('/admin/user_management') }}">จัดการข้อมูลส่วนตัว</a></li>      
+        <li><a href="{{ url('/admin/user_management_admin') }}">จัดการข้อมูลส่วนตัว</a></li>      
       </ul>
       <ul class="nav navbar-nav navbar-right ">
         <li><a href="{{ url('/logout') }}">Logout</a></li>      

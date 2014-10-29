@@ -31,7 +31,7 @@
     </div>
 	
 <ul class="pager">
-      <li class="previous"><a href="#" onclick=" to_first_page()"><span class="glyphicon glyphicon-step-backward"></span> หน้าแรก</a></li>
+      <li class="previous"><a href="#" onclick=" to_first_page();"><span class="glyphicon glyphicon-step-backward"></span> หน้าแรก</a></li>
       <li id="page_previous_1"><a id="a_previous_1" href="#" onclick="pagePrev();"><span class="glyphicon glyphicon-chevron-left"></span> หน้าก่อนหน้า</a></li>
       <li class="disabled">&nbsp; <a style="cursor:default; border-radius:3px; color:#6A6A6A;" id="page_display_1">หน้าที่ 1 / 6</a> &nbsp; </li>
        <!-- ADD LI HERE -->
@@ -67,7 +67,7 @@
       </table>
     </div>
     <ul class="pager">
-      <li class="previous"><a href="#" onclick=""><span class="glyphicon glyphicon-step-backward"></span> หน้าแรก</a></li>
+      <li class="previous"><a href="#" onclick="to_first_page();"><span class="glyphicon glyphicon-step-backward"></span> หน้าแรก</a></li>
       <li id="page_previous_2"><a id="a_previous_2" href="#" onclick="pagePrev();"><span class="glyphicon glyphicon-chevron-left"></span> หน้าก่อนหน้า</a></li>
       <li class="disabled">&nbsp; <a style="cursor:default; border-radius:3px; color:#6A6A6A;" id="page_display_2">หน้าที่ 1 / 6</a> &nbsp; </li>
       <li><a style=" background:none; border:hidden;height:26px; padding-left:0px">
@@ -104,6 +104,7 @@
         });
   }
   function updateValElement(){
+    condition={word:$('#search-input').val()};
       $.get('{{ url("search_admin/get_lastpage") }}',{condition:condition},function(data){
            lastpage=data;
           $('#page_display_1,#page_display_2').html('หน้าที่ '+currentPage+' / '+lastpage)
@@ -112,7 +113,6 @@
            count_mem=data;
            $('#count_mem').html(count_mem); 
        });
-      condition={word:$('#search-input').val()};
   }
   function pageNext(){
       if(currentPage<lastpage){

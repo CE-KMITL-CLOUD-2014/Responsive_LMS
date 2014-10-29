@@ -14,8 +14,10 @@
 		private $status_del;
 		private $detail_delete;
 		private $subjects;
+		const ROWPERPAGE = 10;
 		public function __construct() {
 			parent::__construct();
+			$this->setStatus('0');
 		    $this->id_student=NULL;
 		    $this->nickname=NULL;
 		    $this->birthday_at=NULL;
@@ -33,6 +35,7 @@
 		}
 		public function copy(Student $user){
 			parent::cloneUser($user);
+			$this->setStatus('0');
 		    $this->id_student=$user->getId_student();
 		    $this->nickname=$user->getNickname();
 		    $this->birthday_at=$user->getBirthday_at();
@@ -74,6 +77,7 @@
 					,'department' => $this->getDepartment(),'major' => $this->getMajor()
 					,'adviser' => $this->getAdviser(),'status_del' => $this->getStatus_del()
 					,'detail_delete' => $this->getDetail_delete()));
+					//wait subject relation
 					return $dataTmp;
 				}
 			}	
@@ -163,6 +167,9 @@
 		public function getId_student(){
 			return $this->id_student;
 		}
+		public function setNickname($data){
+			$this->nickname = $data;
+		}
 		public function getNickname(){
 			return $this->nickname;
 		}
@@ -237,5 +244,22 @@
 		}
 		public function getSubjects(){
 			return $this->subjects;
+		}
+		public function toString(){
+			return parent::toString().
+			'id_student = '.$this->id_student.'<br>'.
+			'nickname = '.$this->nickname.'<br>'.
+			'birthday_at = '.$this->birthday_at.'<br>'.
+			'sex = '.$this->sex.'<br>'.
+			'academy = '.$this->academy.'<br>'.
+			'yearadmission = '.$this->yearadmission.'<br>'.
+			'faculty = '.$this->faculty.'<br>'.
+			'student_status = '.$this->student_status.'<br>'.
+			'department = '.$this->department.'<br>'.
+			'major = '.$this->major.'<br>'.
+			'adviser = '.$this->adviser.'<br>'.
+			'status_del = '.$this->status_del.'<br>'.
+			'detail_delete = '.$this->detail_delete.'<br>'.
+			'subjects = '.$this->subjects.'<br>';
 		}
 	}

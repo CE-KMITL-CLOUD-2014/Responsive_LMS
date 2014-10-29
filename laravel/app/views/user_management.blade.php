@@ -16,136 +16,57 @@
 	</ul>
 
 	<div class="tab-content">
+		<?php
+			$tmp=unserialize(Cookie::get('user',null));
+			if($tmp->getStatus()=='9'){
+				$type='admin';
+			}
+			else if($tmp->getStatus()=='1'){
+				$type='teacher';
+			}
+			else if($tmp->getStatus()=='0'){
+				$type='student';
+			}
+			else{
+				return Redirect::to('/');
+			}
+				
+		?>
 	  <div class="tab-pane active" id="waitting">
-		<form class="form-horizontal">
-		<div class="col-lg-12"> 
+		<form class="form-horizontal" method="post" action="{{ url('user_management/waitting/'.$type) }}"> 
 			<div class="form-group"></div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">รหัสประจำตัว</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-				<label class="col-sm-2 control-label">รหัสประจำตัวประชาชน</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">คำนำหน้าชื่อ</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
-				 </div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">ชื่อ</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
-				</div>
-				<label class="col-sm-2 control-label">นามสกุล</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">วัน/เดือน/ปี เกิด</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control mydate" disabled value="">
-				</div>
-				<label class="col-sm-2 control-label">เพศ</label>
-				<div class="col-sm-4">
-					<label class="radio-inline" >
-					  <input type="radio" name="sex" checked >
-					  ชาย</label>
-					<label class="radio-inline">
-					  <input type="radio" name="sex">
-					  หญิง </label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">ปีที่เข้าศึกษา</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-				<label class="col-sm-2 control-label">สถานภาพนักศึกษา</label>
-				<div class="col-sm-4">
-					<label class="radio-inline" >
-					  <input type="radio" name="study" checked >
-					  เรียน</label>
-					<label class="radio-inline">
-					  <input type="radio" name="study">
-					  ไม่เรียน </label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">คณะ</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">ภาควิชา</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">สาขาวิชา</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">อาจารย์ที่ปรึกษา</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" disabled value="">
-				</div>  
-			</div>			  
-		</div>
-		
+			@yield('form')
 
 		<div class="form-group">
         <div class="col-sm-12 text-center">
-          <button type="button" class="btn btn-success">แก้ไข</button>
-		  <button type="button" class="btn btn-success">บันทึก</button>
+		  <button type="submit" id="submit" class="btn btn-success">บันทึก</button>
         </div>
 		</div>
 		</form>
 	  </div>
 	  
 	  <div class="tab-pane" id="edit">
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" action="{{ url('user_management/edit/'.$type) }}"> 
 		<div class="col-lg-12">  
 			<div class="form-group"></div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">รหัสผ่านเก่า</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-sm-2 control-label">รหัสผ่านใหม่</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
+					<input type="password" id="password" name="password" class="form-control"  value="">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">ยืนยันรหัสผ่านใหม่</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  value="">
+					<input type="password" id="confirm_password" name="confirm_password" class="form-control"  value="">
 				</div>
-			</div>	
-			<div class="form-group">
-              <label class="col-sm-2 control-label">ตำแหน่ง</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control"  value="">
-              </div>
-            </div>	  
+			</div>	  
 		</div>
 		
 
 		<div class="form-group">
         <div class="col-sm-12 text-center">
-		  <button type="button" class="btn btn-success">บันทึก</button>
+		  <button type="submit" id="submitPass"class="btn btn-success">บันทึก</button>
         </div>
 		</div>
 		
@@ -154,4 +75,23 @@
 	</div>
   </div>
 </div>
+<script>
+$('#submitPass').prop('disabled',true);
+$('#password,#confirm_password').keyup(function(event){
+	if($('#password').val()==$('#confirm_password').val() && $('#password').val().length>0){
+		$('#submitPass').prop('disabled',false);
+	}
+	else{
+		$('#submitPass').prop('disabled',true);
+	}
+ });
+$('#password,#confirm_password').focusout(function(event){
+	if($('#password').val()==$('#confirm_password').val() && $('#password').val().length>0){
+		$('#submitPass').prop('disabled',false);
+	}
+	else{
+		$('#submitPass').prop('disabled',true);
+	}
+ });
+</script>
 @stop

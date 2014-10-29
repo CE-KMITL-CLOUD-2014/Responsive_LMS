@@ -21,20 +21,18 @@ Route::post('/admin_add/{page}','AdminController@addUser' );
 Route::post('/admin_edit/{page}','AdminController@editUser' );
 Route::post('/admin_delete/{page}','AdminController@deleteUser' );
 Route::get('/search_admin/{method}','AdminController@searchAdmin');
+Route::get('/search_student/{method}','AdminController@searchStudent');
+Route::get('/search_teacher/{method}','AdminController@searchTeacher');
 Route::get('/view_edit_user_admin/{id}','AdminController@viewEditAdmin');
+Route::get('/view_edit_user_student/{id}','AdminController@viewEditStudent');
+Route::get('/view_edit_user_teacher/{id}','AdminController@viewEditTeacher');
 Route::get('/delete_user_admin/{id}','AdminController@deleteAdmin');
-
-Route::get('/test',function(){
-    $condition['word']='';
-    $table = DB::table('user_admin')
-            ->join('user', 'user_admin.id_user', '=', 'user.ID')->where(function($query) use($condition) {
-                $query->where('user.name','like','%'.$condition['word'].'%')
-                 ->orWhere('user.surname','like','%'.$condition['word'].'%')
-                 ->orWhere('user_admin.position','like','%'.$condition['word'].'%');
-            })->where('user_admin.status_del','=','0')->count();
-	return  $table;
-            
-});
+Route::get('/delete_user_student/{id}','AdminController@deleteStudent');
+Route::get('/delete_user_teacher/{id}','AdminController@deleteTeacher');
+Route::post('/user_management/edit/admin','AdminController@userEdit');
+Route::post('/user_management/waitting/admin','AdminController@userWaitting');
+Route::get('/test/user_is_admin','Test@userIsAdmin');
+Route::get('/test/search_exclude_delUser','Test@searchExcludeDelUser');
 Route::get('/info', function(){
 	phpinfo();
 });

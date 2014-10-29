@@ -7,6 +7,7 @@
 		const ROWPERPAGE = 10;
 		public function __construct() {
 			parent::__construct();
+			$this->setStatus('9');
 			$this->telephone=NULL;
 		   	$this->position=NULL;
 		   	$this->status_del=0;
@@ -14,6 +15,7 @@
 		}
 		public function copy(Admin $user){
 			parent::cloneUser($user);
+			$this->setStatus('9');
 		    $this->telephone=$user->getelephone();
 		    $this->position=$user->getPosition();
 		    $this->status_del=$user->getStatus_del();
@@ -144,10 +146,65 @@
 			}
 			return false;
 		}
+		public function addStudent(Student $user){
+			$user_id=$this->addUser($user);
+			if($user_id!=false){
+				$dataTmp = StudentRepository::where('id_user','=',$user_id)->get();
+				if(count($dataTmp)==0){
+					$dataTmp = new StudentRepository;
+					$dataTmp->ID = Student::getMaxId()+1;
+					$dataTmp->id_user = $user_id;
+					$dataTmp->id_student = $user->getId_student(); 
+					$dataTmp->nickname = $user->getNickname(); 
+					$dataTmp->birthday_at = $user->getBirthday_at(); 
+					$dataTmp->sex = $user->getSex(); 
+					$dataTmp->academy = $user->getAcademy(); 
+					$dataTmp->yearadmission = $user->getYearadmission(); 
+					$dataTmp->faculty = $user->getFaculty(); 
+					$dataTmp->student_status = $user->getStudent_status(); 
+					$dataTmp->department = $user->getDepartment(); 
+					$dataTmp->major = $user->getMajor(); 
+					$dataTmp->adviser = $user->getAdviser(); 
+					$dataTmp->status_del = $user->getStatus_del(); 
+					$dataTmp->detail_delete = $user->getDetail_delete(); 
+					//wait subject relation
+					$dataTmp->save();				
+					return true;
+				}	
+			}
+			return false;
+		}
+		public function addTeacher(Teacher $user){
+			$user_id=$this->addUser($user);
+			if($user_id!=false){
+				$dataTmp = TeacherRepository::where('id_user','=',$user_id)->get();
+				if(count($dataTmp)==0){
+					$dataTmp = new TeacherRepository;
+					$dataTmp->ID = Teacher::getMaxId()+1;
+					$dataTmp->id_user = $user_id;
+					$dataTmp->name_user = $user->getName_user();
+					$dataTmp->telephone = $user->getTelephone();
+					$dataTmp->room = $user->getRoom();
+					$dataTmp->history = $user->getHistory();
+					$dataTmp->experience = $user->getExperience();
+					$dataTmp->status_del = $user->getStatus_del();
+					$dataTmp->detail_delete = $user->getDetail_delete();	
+					$dataTmp->save();				
+					return true;
+				}	
+			}
+			return false;
+		}
 		public function editUser(Users $user){
 			return $user->update();
 		}
 		public function editAdmin(Admin $user){
+			return $user->update();
+		}
+		public function editStudent(Student $user){
+			return $user->update();
+		}
+		public function editTeacher(Teacher $user){
 			return $user->update();
 		}
 		public function delAdmin(Admin $user,$detail_delete){
@@ -155,9 +212,15 @@
 			$user->setStatus_del('1');
 			$this->editAdmin($user);
 		}
-		public function addStudent(Student $user){
-			addUser($user);
-
+		public function delStudent(Student $user,$detail_delete){
+			$user->setDetail_delete($detail_delete);
+			$user->setStatus_del('1');
+			$this->editStudent($user);
+		}
+		public function delTeacher(Teacher $user,$detail_delete){
+			$user->setDetail_delete($detail_delete);
+			$user->setStatus_del('1');
+			$this->editTeacher($user);
 		}
 		public function setTelephone($data){
 			$this->telephone = $data;
@@ -191,5 +254,17 @@
 			'status_del = '.$this->status_del.'<br>'.
 			'detail_delete = '.$this->detail_delete.'<br>';
 		}
-		
+		public static function userIsAdmin(Users $user){
+			return ($user!=NULL) && ($user->getStatus()== '9');
+		}
+		public static function searchExcludeDelUser($table){
+			$stack=array();
+			foreach ($table as &$value) {
+	 			if($value['status_del']=='0'){
+	 				array_push($stack,$value);
+	 			}
+			}
+			return $stack;
+		}
+
 	}

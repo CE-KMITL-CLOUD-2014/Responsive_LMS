@@ -28,7 +28,7 @@ class Authen extends BaseController {
 			return Redirect::to('/teacher');
 		}
 		if($tmp->getStatus()=='0'){
-			return 'student';
+			return Redirect::to('/student');
 		}
 
 	//phpinfo();
@@ -64,6 +64,15 @@ class Authen extends BaseController {
 					}
 				}
 			}
+			if($user_tmp->getStatus()=='0'){
+				$user_tmp = Student::getFromUserPass($user_id,$user_password);
+				if($user_tmp!=NULL){
+					if($user_tmp->getStatus_del()=='0'){
+						Cookie::queue('user',serialize($user_tmp),120);
+					}
+				}
+			}
+
 						
 		}
 

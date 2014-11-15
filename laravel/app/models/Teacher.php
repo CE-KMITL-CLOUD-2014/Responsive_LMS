@@ -149,7 +149,7 @@
 		public function setTelephone($data){
 			$this->telephone = $data;
 		}   		
-		public function gettelephone(){
+		public function getTelephone(){
 			return $this->telephone;
 		}
 		public function setRoom($data){

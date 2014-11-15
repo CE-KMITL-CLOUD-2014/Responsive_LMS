@@ -255,6 +255,17 @@
 
 			}
 		}
+		public function AdmindeleteSubject(){
+			Authen::refresh();
+			$tmp=unserialize(Cookie::get('user',null));
+			if(!Admin::userIsAdmin($tmp)){
+				return Redirect::to('/');
+			}
+			$subjInput = Subject::getFromId(Input::get('id'));
+			$detail_delete = Input::get('detail_delete');
+			$tmp->delSubject($subjInput,$detail_delete);
+			return Redirect::to('admin/subject');
+		}
 		public function searchAdmin($method){
 			Authen::refresh();
 			$tmp=unserialize(Cookie::get('user',null));

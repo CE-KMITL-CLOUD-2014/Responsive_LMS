@@ -1,5 +1,5 @@
 <?php
-class Assignment {
+class Assignment extends Contact{
 		private $id;
 		private $id_assignment;
 		private $title;
@@ -32,6 +32,11 @@ class Assignment {
 				
 			}
 	    }
+		public static function cloneFromContact(Contact $contact){
+			$obj = new Assignment;
+			$obj->cloneContact($contact);
+			return $obj;
+		} 
 		public static function getMaxId(){
 	    	$maxid= AssignmentRepository::orderBy('ID', 'DESC')->first();
 			if(!isset($maxid)){
@@ -70,27 +75,78 @@ class Assignment {
             return $output;
 
 		}
-		public static function getFromId($id){
-			$dataTmp = AssignmentRepository::find($id);
-			$obj = new Assignment;
-			
-			if($dataTmp!=NULL){
-				$obj->setId($dataTmp->ID);
-				$obj->setId_assignment($dataTmp->id_assignment);				
-				$obj->setTitle($dataTmp->title);
-				$obj->setDetail($dataTmp->detail);
-				$obj->setId_doc($dataTmp->id_doc);
-				$obj->setId_subject($dataTmp->id_subject);
-				$obj->setId_teacher($dataTmp->id_teacher);
-				$obj->setDate_at($dataTmp->date_at);
-				return $obj;
-			}
-			else{
-				return NULL;
-			}
+		public static function getLastpage_s($condition,$id_subj,$id_user){
+			$table = DB::table('assignment')
+				->join('contact', 'contact.idsubtable','=','assignment.ID' )
+				->where(function($query) use($condition) {
+                $query->where('assignment.id_assignment','like','%'.$condition['word'].'%')
+                ->orWhere('assignment.title','like','%'.$condition['word'].'%');
+            })->where('contact.group_id','=','assignment')
+			->where('contact.receiver','=',$id_user)
+			->where('assignment.id_subject','=',$id_subj)->count();
+			return  max(ceil($table/Assignment::ROWPERPAGE),1);
+		}
+		public static function getCount_s($condition,$id_subj,$id_user){
+			$table = DB::table('assignment')
+				->join('contact', 'contact.idsubtable','=','assignment.ID' )
+				->where(function($query) use($condition) {
+                $query->where('assignment.id_assignment','like','%'.$condition['word'].'%')
+                ->orWhere('assignment.title','like','%'.$condition['word'].'%');
+            })->where('contact.group_id','=','assignment')
+			->where('contact.receiver','=',$id_user)
+			->where('assignment.id_subject','=',$id_subj)->get();
+			$j=2;
+			for($i=0;$i<count($table);$i++){
+				if($i==0){
+					$j++;
+				}
+            	if($table[$i-1]->{'idsubtable'}!=$table[$i]->{'idsubtable'}){
+					$j++;
+				}
+            }
+			return  $j;
+		}
+		public static function search_s($condition,$currentPage,$id_subj,$id_user){
+			$table = DB::table('assignment')
+				->join('contact', 'contact.idsubtable','=','assignment.ID' )
+				->where(function($query) use($condition) {
+                $query->where('assignment.id_assignment','like','%'.$condition['word'].'%')
+                ->orWhere('assignment.title','like','%'.$condition['word'].'%');
+            })->where('contact.group_id','=','assignment')
+			->where('contact.receiver','=',$id_user)
+			->where('assignment.id_subject','=',$id_subj)->get();
+           	$i = ($currentPage-1)* Assignment::ROWPERPAGE;
+            $j = $i+min(Assignment::ROWPERPAGE,count($table)-$i);
+            $output=array();
+            for($k=0;$i<$j;$i++,$k++){
+            	$output[$k]=$table[$i];
+            }
+            return $output;
 
 		}
+		public static function getFromId($id){
+			$conTmp = Contact::getFromId($id);
+			if($conTmp!=NULL){
+				$dataTmp = AssignmentRepository::find($conTmp->getIdsubtable());
+				$obj = new Assignment;
+				if($dataTmp!=NULL){
+					$obj = Assignment::cloneFromContact($conTmp);
+					$obj->setId($dataTmp->ID);
+					$obj->setId_assignment($dataTmp->id_assignment);				
+					$obj->setTitle($dataTmp->title);
+					$obj->setDetail($dataTmp->detail);
+					$obj->setId_doc($dataTmp->id_doc);
+					$obj->setId_subject($dataTmp->id_subject);
+					$obj->setId_teacher($dataTmp->id_teacher);
+					$obj->setDate_at($dataTmp->date_at);
+					return $obj;
+				}
+			}
+			return NULL;
+			
+		}
 		public function update(){
+				parent::update();
 				$dataTmp = AssignmentRepository::where('ID','=',$this->getID())->get();
 
 				if(count($dataTmp)==1){
@@ -157,7 +213,7 @@ class Assignment {
 			return $this->date_at;
 		}
 		public function toString(){
-			return 
+			return parent::toString().
 					'id = '.$this->id.'<br>'.
 					'id_assignment = '.$this->id_assignment.'<br>'.
 					'title = '.$this->title.'<br>'.
@@ -166,25 +222,6 @@ class Assignment {
 					'id_subject = '.$this->id_subject.'<br>'.
 					'id_teacher = '.$this->id_teacher.'<br>'.
 					'date_at = '.$this->date_at.'<br>';
-		}
-		public function addAssignment(Assignment $assign){
-			$dataTmp = AssignmentRepository::where('ID','=',$assign->getID())->get();
-			if(count($dataTmp)==0){
-				$dataTmp = new AssignmentRepository;
-				$dataTmp->ID = Assignment::getMaxId()+1;
-				$dataTmp->id_assignment = $assign->getId_assignment();
-				$dataTmp->title = $assign->getTitle();
-				$dataTmp->detail = $assign->getDetail();
-				$dataTmp->id_doc = $assign->getId_doc();
-				$dataTmp->id_subject = $assign->getId_subject();
-				$dataTmp->id_teacher= $assign->getId_teacher();
-				$dataTmp->date_at = $assign->getDate_at();
-				$dataTmp->save();
-				return true;
-			}
-			else{
-				return false;
-			}
 		}
 	}
 		

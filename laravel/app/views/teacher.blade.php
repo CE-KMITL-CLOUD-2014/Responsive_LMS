@@ -1,10 +1,7 @@
 @extends('header_lms')
 
 @section('body')
-<?php
-	$tmp=unserialize(Cookie::get('user',null));
-	echo $tmp->toString();
-?>
+
 <div id="wrap"> 
   <!-- Begin page content -->
   <div class="container">

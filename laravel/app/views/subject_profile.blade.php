@@ -1,25 +1,19 @@
 @extends('header_teacher')
 
 @section('body')
-<?php
-	$id_subj=unserialize(Cookie::get('subject',null));
-	if($id_subj!=null){
-		$tmp= Subject::getFromID($id_subj);
-	}
-	echo $tmp->toString();
-?>
+
 
 <!-- Wrap all page content here -->
 <div id="wrap"> 
   <!-- Begin page content -->
   <div class="container">
     <div class="page-header">
-      <h1>ข้อมูลรายวิชา เศรษฐศาสตร์เพื่อธุรกิจ </h1>
+      <h1>ข้อมูลรายวิชา {{ $subj->getName() }} </h1>
     </div>
   <div class="col-lg-12">
    <div class="panel panel-success">
 
-	<div class="panel-heading">รายละเอียด 90401009 </div>
+	<div class="panel-heading">รายละเอียด {{ $subj->getId_subject() }} </div>
 	
 	<div class="panel-body">
 	 <div class="form-group">  

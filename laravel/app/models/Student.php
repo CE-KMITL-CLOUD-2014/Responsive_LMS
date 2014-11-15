@@ -251,6 +251,9 @@
 		public function getSubjects(){
 			return $this->subjects;
 		}
+		public static function userIsStudent($user){
+			return ($user!=NULL) && ($user->getStatus()== '0');
+		}
 		public function toString(){
 			return parent::toString().
 			'id_student = '.$this->id_student.'<br>'.
@@ -266,6 +269,6 @@
 			'adviser = '.$this->adviser.'<br>'.
 			'status_del = '.$this->status_del.'<br>'.
 			'detail_delete = '.$this->detail_delete.'<br>'.
-			'subjects = '.$this->subjects.'<br>';
+			'subjects = '.json_encode($this->subjects);
 		}
 	}
